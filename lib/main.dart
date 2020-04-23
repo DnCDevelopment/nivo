@@ -37,12 +37,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, // потом удалим
       title: 'Nivo',
       theme: ThemeData(
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: initialRoute,
+      
       routes: {
         '/': (context) => PrimaryPage(),
         '/signin': (context) => SignInTabs(),
