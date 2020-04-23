@@ -37,6 +37,10 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         IconButton(
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          splashColor: Colors.transparent,
           icon: Icon(
             Icons.menu,
             color: Colors.white,
@@ -52,6 +56,10 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
               color: Colors.white
         ))),
         IconButton(
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          splashColor: Colors.transparent,
           icon: Icon(
             Icons.shopping_cart,
             color: Colors.white,
