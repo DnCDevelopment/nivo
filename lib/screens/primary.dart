@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:nivo/widgets/MainAppbar/MainAppbar.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class PrimaryPage extends StatefulWidget {
@@ -35,9 +35,7 @@ class _PrimaryPageStated extends State<PrimaryPage> {
           ],
         ),
       ),
-      appBar: AppBar(
-        title: Text('Nivo'),
-      ),
+      appBar: MainAppbar(),
       body: Center(
         child: Text('Primary page'),
       ),
