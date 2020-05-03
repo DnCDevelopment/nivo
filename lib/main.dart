@@ -20,13 +20,13 @@ class Auth {
 }
 
 void main() async {
-WidgetsFlutterBinding.ensureInitialized();
-  final Auth _auth = Auth();
-  final bool isLogged = await _auth.isLogged();
-  final MyApp myApp = MyApp(
-    initialRoute: isLogged ? '/' : '/singnin',
-  );
-  runApp(myApp);
+  WidgetsFlutterBinding.ensureInitialized();
+    final Auth _auth = Auth();
+    final bool isLogged = await _auth.isLogged();
+    final MyApp myApp = MyApp(
+      initialRoute: isLogged ? '/restaurants' : '/',
+    );
+    runApp(myApp);
 }
 
 class MyApp extends StatelessWidget {
@@ -44,10 +44,9 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: initialRoute,
-      
       routes: {
-        '/': (context) => PrimaryPage(),
-        '/signin': (context) => SignInTabs(),
+        '/restaurants': (context) => PrimaryPage(),
+        '/': (context) => SignInTabs(),
       },
     );
   }

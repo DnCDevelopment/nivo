@@ -17,7 +17,6 @@ class _PrimaryPageStated extends State<PrimaryPage> {
   final db = Firestore.instance;
   List<IDRestaurant> restaurants;
 
-
   @override
   void didChangeDependencies(){
     super.didChangeDependencies();
@@ -81,7 +80,7 @@ class _PrimaryPageStated extends State<PrimaryPage> {
           },
       ),).toList());
     } else {
-      return Align(child: Text('no restaurants found'), alignment: Alignment.center,);
+      return Align(child: Text(''), alignment: Alignment.center,);
     }
   }
 

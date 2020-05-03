@@ -28,13 +28,14 @@ class _SignInState extends State<SignIn> {
         AuthResult result = await auth.signIn(_email, _password);
         final String uid = result.user.uid;
         if(uid != null && uid != '') {
-          Navigator.pushNamed(context, '/');
+          Navigator.pushNamed(context, '/restaurants');
         }
       } on PlatformException catch(err) {
         setState(() {
           _error = err.message;
         });
       } catch (err) {
+          print(err);
           _error = err.toString();
       }
     }
