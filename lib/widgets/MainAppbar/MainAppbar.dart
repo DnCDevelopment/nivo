@@ -50,7 +50,7 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
           }
         ),
         Expanded(
-          child: Text("Nivo",
+          child: Text(title,
             style: TextStyle(
               fontSize: 20,
               color: Colors.white

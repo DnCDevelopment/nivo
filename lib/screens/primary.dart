@@ -51,7 +51,7 @@ class _PrimaryPageStated extends State<PrimaryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: MainDrawer(),      
-        appBar: MainAppbar(),
+        appBar: MainAppbar(title: "Nivo",),
         body: SingleChildScrollView(
           child: Container(child: RestarauntList(restaurants: restaurants,)),
         ));
