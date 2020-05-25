@@ -5,6 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nivo/widgets/MainAppbar/MainAppbar.dart';
 import 'package:nivo/widgets/MainDrawer/MainDrawer.dart';
 import 'package:nivo/widgets/RestaurantsList/RestaurantsList.dart';
+import 'package:nivo/widgets/MainAppbar/MenuBtn.dart';
+
+
 
 import 'package:nivo/models/Restaurant.dart';
 
@@ -51,7 +54,7 @@ class _PrimaryPageStated extends State<PrimaryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: MainDrawer(),      
-        appBar: MainAppbar(title: "Nivo",),
+        appBar: MainAppbar(title: "Nivo",leftButton: MenuBtn(),),
         body: SingleChildScrollView(
           child: Container(child: RestarauntList(restaurants: restaurants,)),
         ));
