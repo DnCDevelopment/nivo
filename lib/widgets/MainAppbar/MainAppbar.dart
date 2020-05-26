@@ -54,7 +54,7 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
                         color: Colors.white,
                       ),
                       onPressed: () {
-                          Navigator.pushNamed(context, '/orders');
+                          Navigator.pushNamed(context, '/cart');
                       })
           ]),
     ));

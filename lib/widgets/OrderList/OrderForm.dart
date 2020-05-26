@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 class OrderForm extends StatelessWidget {
   final Function changeNumber;
+  final Function changeAddress;
   final Function changePayment;
   final String currentPayment;
   final TextEditingController phoneController = TextEditingController();
-  OrderForm({this.changeNumber, this.changePayment, this.currentPayment});
+  OrderForm({this.changeNumber, this.changePayment, this.currentPayment, this.changeAddress});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,17 @@ class OrderForm extends StatelessWidget {
               margin: EdgeInsets.all(20),
               child: TextField(
                 decoration: InputDecoration(
-                  labelText: "Phone",
+                  labelText: "Адресс",
+                ),
+                onChanged: (val) {
+                  changeAddress(val);
+                },
+              )),
+          Container(
+              margin: EdgeInsets.all(20),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: "Номер телефона",
                 ),
                 onChanged: (val) {
                   changeNumber(val);
@@ -27,12 +38,12 @@ class OrderForm extends StatelessWidget {
           Column(
             children: <Widget>[
               RadioListTile(
-                  title: Text("Cash"),
+                  title: Text("Наличный расчет"),
                   value: "Cash",
                   groupValue: currentPayment,
                   onChanged: (value) => changePayment(value)),
               RadioListTile(
-                  title: Text("Card"),
+                  title: Text("Безналичный расчиет"),
                   value: "Card",
                   groupValue: currentPayment,
                   onChanged: (value) => changePayment(value))

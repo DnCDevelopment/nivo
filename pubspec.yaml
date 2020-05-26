@@ -25,7 +25,9 @@ environment:
 dependencies:
   firebase_auth: ^0.15.5+3
   firebase_storage: ^3.1.5
+  flutter_google_places: ^0.2.5
   cloud_firestore: ^0.13.4+2
+  google_maps_webservice: ^0.0.16
   geolocator: ^5.3.1
   geocoder: ^0.2.1
   provider: ^4.0.5+1

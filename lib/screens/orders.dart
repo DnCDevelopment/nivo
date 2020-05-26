@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nivo/models/Dish.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:nivo/screens/waiting.dart';
 import 'package:nivo/widgets/MainAppbar/MainAppbar.dart';
 import 'package:nivo/widgets/MainAppbar/BackBtn.dart';
 import 'package:nivo/widgets/OrderList/OrderList.dart';
@@ -20,35 +21,55 @@ class OrdersPage extends StatefulWidget {
 class _OrderPageState extends State<OrdersPage> {
   String _phoneNumber;
   String _paymentType = "Cash";
+  String _address = "";
   void changePhoneNumber(String phoneNumber) {
     setState(() => this._phoneNumber = phoneNumber);
+  }
+
+  void changeAddress(String address) {
+    setState(() => this._address = address);
   }
 
   void changePaymentType(String paymentType) {
     setState(() => this._paymentType = paymentType);
   }
 
-  Future<bool> sendData(UnmodifiableListView<IDDish> dishes) async {
+  Future<DocumentReference> sendData(
+      UnmodifiableListView<IDDish> dishes) async {
     DateTime date = DateTime.now();
     Auth auth = new Auth();
     FirebaseUser user = await auth.getCurrentUser();
+    DocumentReference userRef =
+        Firestore.instance.collection('users').document(user.uid);
     String restarauntId = dishes[0].getRestaurant();
-    List<String> dishesNames =
-        dishes.map((e) => "/dishes/" + e.getId()).toList();
+    DocumentReference restarauntRef =
+        Firestore.instance.collection('restaurants').document(restarauntId);
+    List<DocumentReference> dishesRef = dishes
+        .map((e) => Firestore.instance.collection('dishes').document(e.getId()))
+        .toList();
     try {
-      await Firestore.instance.collection('orders').add({
-        'date': "${date.day}.${date.month}.${date.year}",
-        'dishes': dishesNames,
-        'number':
-            "${date.day}${date.month}${date.year}${date.hour}${date.second}",
-        'restaurant': '/restaurants/' + restarauntId,
-        'status': 'prepare',
-        'user': '/users/' + user.uid,
+      DocumentReference orderRef =
+          await Firestore.instance.collection('orders').add({
+        'date': date.toString(),
+        'dishes': dishesRef,
+        'restaurant': restarauntRef,
+        'number': '',
+        'status': 'waiting',
+        'user': userRef,
+        'address': _address,
       });
+      Firestore.instance
+          .collection('orders')
+          .document(orderRef.documentID)
+          .setData(
+        {'number': orderRef.documentID}, merge: true
+      );
+      return orderRef;
     } catch (err) {
-      return false;
+      print(err.toString());
+      print("Failed");
+      return null;
     }
-    return true;
   }
 
   Future<void> emptyCartDialog(BuildContext context) async {
@@ -117,9 +138,15 @@ class _OrderPageState extends State<OrdersPage> {
                   style: TextStyle(fontSize: 18),
                 ),
                 onPressed: () {
-                  sendData(cart.dishes).then((sended) => {
-                    if(sended) Navigator.pushNamed(context, "/waiting")
-                  });
+                  print('Sending data');
+                  sendData(cart.dishes).then((document) {
+                    if (document != null)
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  SingleOrder(orderRef: document.documentID)));
+                  }).catchError((err) => print(err));
                 }),
           ]);
         }));

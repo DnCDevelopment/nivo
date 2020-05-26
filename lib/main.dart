@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoder/geocoder.dart';
+import 'package:nivo/screens/my-orders.dart';
 import 'package:nivo/screens/waiting.dart';
 import 'package:provider/provider.dart';
 
@@ -38,9 +39,9 @@ class MyApp extends StatelessWidget {
   final bool isLogged;
   final String area;
   final routes = {
+    '/orders': (context) => UserOrdersScreen(),
     '/restaurants': (context) => PrimaryPage(),
-    '/orders': (context) => OrdersPage(),
-    '/waiting': (context) => WaitingTabs(),
+    '/cart': (context) => OrdersPage(),
     '/cityError': (context) => errorScreen(title: "Сори мы только в Киеве"),
     '/': (context) => SignInTabs(),
   };
