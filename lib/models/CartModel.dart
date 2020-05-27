@@ -21,7 +21,6 @@ class CartModel extends ChangeNotifier {
 
   CartModel add(IDDish item) {
     _dishes.add(item);
-    print(this.length);
     notifyListeners();
     return this;
   }

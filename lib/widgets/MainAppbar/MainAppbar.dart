@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:nivo/widgets/MainAppbar/CartBtn.dart';
 
 class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Widget child;
+  final Widget bottom;
   final Function onPressed;
   final Function onTitleTapped;
   final Widget leftButton;
   final bool withOrdersBtn;
+  final Widget rightButton;
 
   @override
   final Size preferredSize;
@@ -15,9 +18,11 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
       this.child,
       this.onPressed,
       this.onTitleTapped,
+      this.rightButton,
       this.withOrdersBtn = true,
-      this.leftButton})
-      : preferredSize = Size.fromHeight(80.0);
+      this.leftButton,
+      this.bottom})
+      : preferredSize = Size.fromHeight(bottom != null ? 106 : 80);
 
   @override
   Widget build(BuildContext context) {
@@ -35,28 +40,22 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      child: Flex(
-          direction: Axis.horizontal,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            leftButton,
-            Expanded(
-                child: Text(title,
-                    style: TextStyle(fontSize: 20, color: Colors.white))),
-                  IconButton(
-                      highlightColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      splashColor: Colors.transparent,
-                      icon: Icon(
-                        Icons.shopping_cart,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                          Navigator.pushNamed(context, '/cart');
-                      })
-          ]),
+      child: Column(children: [
+        Flex(
+            direction: Axis.horizontal,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              leftButton,
+              Expanded(
+                  child: Text(title,
+                      style: TextStyle(fontSize: 20, color: Colors.white))),
+              if(rightButton == null && withOrdersBtn) CartBtn(),
+              if(rightButton != null ) rightButton,
+            ]),
+
+        if (bottom != null) bottom
+      ]),
     ));
   }
 }
