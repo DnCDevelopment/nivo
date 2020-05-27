@@ -5,6 +5,7 @@ import 'package:nivo/models/Dish.dart';
 import 'package:nivo/widgets/MainAppbar/BackBtn.dart';
 import 'package:nivo/widgets/MainAppbar/CheckBtn.dart';
 import 'package:nivo/widgets/MainAppbar/MainAppbar.dart';
+
 import 'package:nivo/widgets/OrderList/OrderList.dart';
 
 class SingleOrder extends StatefulWidget {
@@ -41,6 +42,7 @@ class _SingleOrder extends State<SingleOrder> {
             IDDish(url, dish.data['name'], dish.data['price'],
                 dish.data['restaraunt'], dish.documentID)
           ]);
+
     });
   }
 
@@ -60,6 +62,7 @@ class _SingleOrder extends State<SingleOrder> {
               Tab(text: 'Log in'),
               Tab(text: 'Registration'),
             ]),
+
           ),
           body: TabBarView(
             children: [

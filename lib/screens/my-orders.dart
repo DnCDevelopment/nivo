@@ -31,6 +31,7 @@ class UserOrdersScreenState extends State<UserOrdersScreen> {
         .collection('/orders')
         .where('user', isEqualTo: db.collection('/users').document(user.uid))
         .getDocuments();
+
     setState(() => this.orders = orders.documents
         .map((element) => Order(element.documentID, element.data['date'],
             element.data['restaurant'], element.data['status']))

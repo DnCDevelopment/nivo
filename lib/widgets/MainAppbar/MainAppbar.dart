@@ -24,6 +24,7 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
       this.bottom})
       : preferredSize = Size.fromHeight(bottom != null ? 106 : 80);
 
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -56,6 +57,7 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
 
         if (bottom != null) bottom
       ]),
+
     ));
   }
 }

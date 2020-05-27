@@ -33,6 +33,7 @@ dependencies:
   path_provider: ^0.4.1
   provider: ^4.0.5+1
   flutter_html_to_pdf: ^0.5.2
+
   flutter:
     sdk: flutter
 

@@ -38,6 +38,7 @@ class _OrderPageState extends State<OrdersPage> {
   Future<DocumentReference> sendData(
       UnmodifiableListView<IDDish> dishes) async {
     Position currentPostition = await Geolocator().getCurrentPosition();
+
     DateTime date = DateTime.now();
     Auth auth = new Auth();
     FirebaseUser user = await auth.getCurrentUser();
@@ -65,6 +66,7 @@ class _OrderPageState extends State<OrdersPage> {
           .collection('orders')
           .document(orderRef.documentID)
           .setData({'number': orderRef.documentID}, merge: true);
+
       return orderRef;
     } catch (err) {
       print(err.toString());
