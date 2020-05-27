@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "411016547773",
+    "firebase_url": "https://shop-delivery-demo.firebaseio.com",
+    "project_id": "shop-delivery-demo",
+    "storage_bucket": "shop-delivery-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411016547773:android:6d21bcf56f4ce12f2556d4",
+        "android_client_info": {
+          "package_name": "com.example.nivo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411016547773-e3n9vcbu5kpt3hs0dc9f8pisr66qh39k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMscU2NpUTPeB43FBnf9UYDudGYp3Swkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411016547773-e3n9vcbu5kpt3hs0dc9f8pisr66qh39k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "411016547773-793jp450lf262f9gr61c1rlred1fp4un.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.nivo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
