@@ -35,7 +35,6 @@ class _SignInState extends State<SignIn> {
           _error = err.message;
         });
       } catch (err) {
-          print(err);
           _error = err.toString();
       }
     }

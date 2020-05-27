@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:geolocator/geolocator.dart';
 import 'package:nivo/models/CartModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,8 @@ class _OrderPageState extends State<OrdersPage> {
 
   Future<DocumentReference> sendData(
       UnmodifiableListView<IDDish> dishes) async {
+    Position currentPostition = await Geolocator().getCurrentPosition();
+
     DateTime date = DateTime.now();
     Auth auth = new Auth();
     FirebaseUser user = await auth.getCurrentUser();
@@ -56,14 +59,14 @@ class _OrderPageState extends State<OrdersPage> {
         'number': '',
         'status': 'waiting',
         'user': userRef,
+        'geolocation': GeoPoint(currentPostition.latitude, currentPostition.longitude),
         'address': _address,
       });
       Firestore.instance
           .collection('orders')
           .document(orderRef.documentID)
-          .setData(
-        {'number': orderRef.documentID}, merge: true
-      );
+          .setData({'number': orderRef.documentID}, merge: true);
+
       return orderRef;
     } catch (err) {
       print(err.toString());
@@ -122,6 +125,7 @@ class _OrderPageState extends State<OrdersPage> {
                   ],
                 ),
                 OrderForm(
+                  changeAddress: changeAddress,
                   changeNumber: changePhoneNumber,
                   changePayment: changePaymentType,
                   currentPayment: _paymentType,
@@ -138,7 +142,6 @@ class _OrderPageState extends State<OrdersPage> {
                   style: TextStyle(fontSize: 18),
                 ),
                 onPressed: () {
-                  print('Sending data');
                   sendData(cart.dishes).then((document) {
                     if (document != null)
                       Navigator.push(
