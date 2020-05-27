@@ -15,5 +15,4 @@ class Order {
   String get shortDate {
     return date.split(" ")[0];
   }
-
 }

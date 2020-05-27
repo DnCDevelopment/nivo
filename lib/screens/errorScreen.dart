@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class errorScreen extends StatelessWidget {
+class ErrorScreen extends StatelessWidget {
   final String _title;
 
-  errorScreen({String title}):_title = title;
+  ErrorScreen({String title}) : _title = title;
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +12,9 @@ class errorScreen extends StatelessWidget {
       body: Container(
         child: Center(
             child: Text(
-            _title,
-            style: TextStyle(
-              
-              color: Colors.white,
-              fontSize: 25
-            ),
-            )
-        ),
+          _title,
+          style: TextStyle(color: Colors.white, fontSize: 25),
+        )),
       ),
     );
   }

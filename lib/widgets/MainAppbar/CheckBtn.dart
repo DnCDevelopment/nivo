@@ -1,12 +1,10 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart' as fb;
 import 'package:flutter/material.dart';
 import 'package:flutter_html_to_pdf/flutter_html_to_pdf.dart';
 import 'package:liquid_engine/liquid_engine.dart';
 import 'package:nivo/models/Dish.dart';
 import 'package:path_provider/path_provider.dart';
-
 
 class CheckBtn extends StatelessWidget {
   static const String _template = '''
@@ -37,7 +35,7 @@ class CheckBtn extends StatelessWidget {
   CheckBtn({List<IDDish> dishes, this.order})
       : _dishes = dishes != null ? dishes : [];
 
-  Future<String> createCheck() async{
+  Future<String> createCheck() async {
     final context = Context.create();
     context.variables['id'] = order;
     context.variables['totalPrice'] = _dishes

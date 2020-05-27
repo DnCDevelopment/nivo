@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:nivo/screens/my-orders.dart';
-import 'package:nivo/screens/waiting.dart';
 import 'package:provider/provider.dart';
 
 import 'package:nivo/screens/login.dart';
@@ -14,7 +13,6 @@ import 'package:nivo/screens/errorScreen.dart';
 import 'package:nivo/services/auth.dart';
 
 import 'package:nivo/models/CartModel.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,32 +40,27 @@ class MyApp extends StatelessWidget {
     '/orders': (context) => UserOrdersScreen(),
     '/restaurants': (context) => PrimaryPage(),
     '/cart': (context) => OrdersPage(),
-    '/cityError': (context) => errorScreen(title: "Сори мы только в Киеве"),
+    '/cityError': (context) => ErrorScreen(title: "Сори мы только в Киеве"),
     '/': (context) => SignInTabs(),
   };
   MyApp({this.isLogged, this.area});
 
   @override
   Widget build(BuildContext context) {
-    print(area);
-    final initialRoute = (area != "Kyiv City") 
-                          ? "/cityError" 
-                          :  isLogged 
-                            ? "/restaurants" 
-                            : "/";
-    
+    final initialRoute = (area != "Kyiv City" && area != "Kyiv")
+        ? "/cityError"
+        : isLogged ? "/restaurants" : "/";
+
     return ChangeNotifierProvider(
-      create: (context) => CartModel(),
-      child:MaterialApp(
-          debugShowCheckedModeBanner: false, // потом удалим
-          title: 'Nivo',
-          theme: ThemeData(
-            primarySwatch: Colors.red,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          initialRoute: initialRoute,
-          routes: routes
-        )
-      );
+        create: (context) => CartModel(),
+        child: MaterialApp(
+            debugShowCheckedModeBanner: false, // потом удалим
+            title: 'Nivo',
+            theme: ThemeData(
+              primarySwatch: Colors.red,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            initialRoute: initialRoute,
+            routes: routes));
   }
 }

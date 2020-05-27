@@ -5,6 +5,7 @@ import 'package:nivo/models/Dish.dart';
 import 'package:nivo/widgets/MainAppbar/BackBtn.dart';
 import 'package:nivo/widgets/MainAppbar/CheckBtn.dart';
 import 'package:nivo/widgets/MainAppbar/MainAppbar.dart';
+import 'package:nivo/widgets/Cart/cart.dart';
 
 import 'package:nivo/widgets/OrderList/OrderList.dart';
 
@@ -42,7 +43,6 @@ class _SingleOrder extends State<SingleOrder> {
             IDDish(url, dish.data['name'], dish.data['price'],
                 dish.data['restaraunt'], dish.documentID)
           ]);
-
     });
   }
 
@@ -57,24 +57,37 @@ class _SingleOrder extends State<SingleOrder> {
           appBar: MainAppbar(
             leftButton: BackBtn(),
             title: 'Ваш заказ',
-            rightButton: CheckBtn(dishes: dishes,order: orderRef,),
+            rightButton: CheckBtn(
+              dishes: dishes,
+              order: orderRef,
+            ),
             bottom: TabBar(tabs: [
-              Tab(text: 'Log in'),
-              Tab(text: 'Registration'),
+              Tab(text: 'Order'),
+              Tab(text: 'Cart'),
             ]),
-
           ),
           body: TabBarView(
             children: [
               StreamBuilder<DocumentSnapshot>(
                   stream:
-                      db.collection('/orders').document(orderRef).snapshots(),
+                      db.collection('orders').document(orderRef).snapshots(),
                   builder: (context, snapshot) {
-                    return OrderList.fromDishes(
-                      dishes: this.dishes,
+                    return Column(
+                      children: [
+                        OrderList.fromDishes(
+                          dishes: this.dishes,
+                        ),
+                        Text(
+                          snapshot.data != null
+                              ? snapshot.data['status'].toUpperCase()
+                              : '',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        )
+                      ],
                     );
                   }),
-              Container()
+              Cart(orderRef)
             ],
           ),
         ),
